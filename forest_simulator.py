@@ -136,31 +136,6 @@ class Peaceful(Animal):
         list_of_animals.append(Peaceful())
         print('breed of turtle')
 
-def simulation():
-    # screenDefine()
-    window.destroy()
-
-    # Create animal instances
-    global list_of_animals
-    list_of_animals=[]
-    for _ in range(no_of_peacefuls):
-        list_of_animals.append(Peaceful())
-    for _ in range(no_of_predators):
-        list_of_animals.append(Predator())
-    # Run simulation
-    timer=0
-    while True:
-        wn.update()
-
-        for animal in list_of_animals:
-            animal.move()
-            for animal2 in list_of_animals:
-                if animal != animal2:
-                    animal.onCollision(animal2)
-            # test.onCollision(animal)
-
-        timer+=1
-
 class Gui:
     def __init__(self, win):
         button_start = tk.Button(win, text='Start symulacji', height=1, width=16, fg='black', bg='silver',
@@ -204,6 +179,31 @@ class Gui:
             self.label_no_peacefuls['text']=f'Number of peacefuls: {no_of_peacefuls}'
 
 
+def simulation():
+    # screenDefine()
+    window.destroy()
+
+    # Create animal instances
+    global list_of_animals
+    list_of_animals=[]
+    for _ in range(no_of_peacefuls):
+        list_of_animals.append(Peaceful())
+    for _ in range(no_of_predators):
+        list_of_animals.append(Predator())
+    # Run simulation
+    timer=0
+    while True:
+        wn.update()
+
+        for animal in list_of_animals:
+            animal.move()
+            for animal2 in list_of_animals:
+                if animal != animal2:
+                    animal.onCollision(animal2)
+            # test.onCollision(animal)
+
+        timer+=1
+
 # Define GUI
 window = tk.Tk()
 window.title('GUI')
@@ -211,3 +211,10 @@ window.geometry('300x150')
 Gui(window)
 
 window.mainloop()
+
+# thread1 = threading.Thread(target=simulation)
+# thread1.start()
+
+# thread2 = threading.Thread(target=window.mainloop)
+# thread2.setDaemon(True)
+# thread2.start()
